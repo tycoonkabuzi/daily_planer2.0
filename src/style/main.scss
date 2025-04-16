@@ -1,0 +1,254 @@
+@font-face {
+  font-family: Raleway;
+  src: url("../assets/fonts/Raleway/Raleway-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: Pacifico;
+  src: url("../assets/fonts/Pacifico/Pacifico-Regular.ttf");
+}
+
+$primary: rgb(98, 98, 160);
+$secondary: rgb(226, 152, 165);
+$grayText: rgb(99, 99, 99);
+$red: rgb(239, 37, 37);
+$green: rgb(40, 249, 40);
+$yellow: rgb(234, 234, 36);
+$orange: rgb(241, 156, 28);
+
+@mixin buttonUrgency {
+  width: 50px;
+  height: 50px;
+  border-radius: 30%;
+  &:hover {
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+
+.main {
+  font-family: Raleway;
+  display: flex;
+  &__menu {
+    position: fixed;
+    background-color: lighten($primary, 45%);
+    height: 100vh;
+    text-align: center;
+    width: 20%;
+
+    ul {
+      width: 150px;
+      margin: auto;
+      margin-top: 100px;
+
+      li {
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        text-align: left;
+        list-style: none;
+        margin-top: 40px;
+        color: $primary;
+        &:hover {
+          color: $secondary;
+          cursor: pointer;
+        }
+        img {
+          width: 40%;
+        }
+        p {
+          width: 100px;
+        }
+      }
+    }
+    h1 {
+      display: block;
+      font-family: Pacifico;
+      color: $primary;
+      padding-top: 20px;
+    }
+    span {
+      font-family: Raleway;
+      font-weight: 100;
+      color: $secondary;
+    }
+  }
+
+  &__home {
+    width: 70%;
+    margin: auto;
+    margin-left: 22%;
+
+    #red {
+      background-color: lighten($red, 40%);
+    }
+    #yellow {
+      background-color: lighten($yellow, 40%);
+    }
+    #green {
+      background-color: lighten($green, 40%);
+    }
+    #orange {
+      background-color: lighten($orange, 40%);
+    }
+    &__content {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      &__day {
+        margin-top: 40px;
+        width: 25%;
+        height: 170px;
+        border: 1px solid $primary;
+        padding: 30px;
+        align-items: center;
+        &__title {
+          font-size: 34px;
+          font-weight: 800;
+          color: $primary;
+          margin-top: -20px;
+          background-color: white;
+          width: 200px;
+          margin-left: 10px;
+          padding-bottom: 20px;
+        }
+        &__content {
+          padding-left: 20px;
+          padding-right: 20px;
+          color: $grayText;
+
+          li {
+            margin-top: 5px;
+            list-style: none;
+          }
+        }
+      }
+    }
+    &__title {
+      font-size: 24px;
+      color: $primary;
+      border-bottom: 1px solid $primary;
+      margin-top: 80px;
+      width: 85%;
+      padding-bottom: 20px;
+      margin-left: 100px;
+    }
+
+    &__inputs {
+      width: 80%;
+      display: grid;
+      margin: auto;
+      margin-top: 50px;
+
+      input {
+        margin-top: 20px;
+        height: 40px;
+        border: solid 1px $primary;
+        padding-left: 20px;
+        font-family: Raleway;
+        padding-right: 20px;
+      }
+      &__howLong {
+        margin-top: 20px;
+        &__container {
+          display: flex;
+          margin-top: 10px;
+          gap: 40px;
+          background-color: rgb(197, 222, 238);
+          padding-left: 50px;
+          padding-right: 25px;
+          height: 40px;
+          align-items: center;
+          li {
+            list-style: none;
+            color: lighten($primary, 5);
+            cursor: pointer;
+          }
+          .clicked {
+            background-color: red;
+            padding: 14px;
+            border-radius: 2px;
+            color: white;
+            background-color: darken(rgb(197, 222, 238), 40);
+          }
+        }
+      }
+
+      textarea {
+        padding-left: 20px;
+        margin-top: 20px;
+        border: solid 1px $primary;
+        padding-top: 10px;
+        font-family: Raleway;
+      }
+    }
+    &__urgency {
+      width: 50%;
+      margin: auto;
+      margin-top: 50px;
+
+      &__colors {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        &--red {
+          background-color: rgb(216, 34, 34);
+          @include buttonUrgency();
+        }
+        &--orange {
+          background-color: rgb(246, 179, 57);
+          @include buttonUrgency();
+        }
+        &--yellow {
+          background-color: rgb(202, 202, 33);
+          @include buttonUrgency();
+        }
+        &--green {
+          background-color: rgb(22, 122, 22);
+          @include buttonUrgency();
+        }
+      }
+    }
+    button {
+      background-color: $primary;
+      width: 100px;
+      height: 50px;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      margin-left: 34%;
+      margin-top: 30px;
+      &:hover {
+        background-color: $secondary;
+      }
+    }
+    &__subtitle {
+      width: 80%;
+      margin: auto;
+      padding-top: 20px;
+    }
+    &__home {
+      width: 80%;
+      margin: auto;
+      padding-top: 30px;
+      &__header {
+        font-weight: 600;
+        padding-bottom: 10px;
+        font-size: 25px;
+      }
+
+      ul {
+        padding-top: 30px;
+        width: 90%;
+        margin: auto;
+        font-weight: 600;
+        padding-bottom: 30px;
+      }
+    }
+  }
+}
