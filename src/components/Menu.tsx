@@ -4,6 +4,7 @@ import homeIcon from "../assets/images/home.png";
 import addIcon from "../assets/images/add.png";
 import dashboardIcon from "../assets/images/dashboard.png";
 import helpIcon from "../assets/images/help.png";
+import { Outlet } from "react-router";
 const Menu = () => {
   return (
     <aside className="main">
@@ -38,7 +39,7 @@ const Menu = () => {
           </a>
         </ul>
       </div>
-      <Home />
+      <Outlet />
     </aside>
   );
 };
