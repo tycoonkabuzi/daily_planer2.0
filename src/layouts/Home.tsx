@@ -1,94 +1,62 @@
+import { useEffect, useState } from "react";
+
 import "../style/main.scss";
+import axios from "axios";
 const Home = () => {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/activities");
+        const dayOrder = [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ];
+        const sorted = response.data.sort(
+          (a, b) => dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day)
+        );
+        setData(sorted);
+      } catch (error) {
+        setError(error.message || "Unable to tech data ");
+      } finally {
+        setLoading(true);
+      }
+    };
+    fetchData();
+  }, [data]);
+
   return (
     <div className="main__home">
       <div className="main__home__title">Welcome to your Daily Plan</div>
 
-      <div className="main__home__content">
-        <div className="main__home__content__day">
-          <div className="main__home__content__day__title">Monday</div>
-          <div className="main__home__content__content__day__content">
-            <ul>
-              <li id="yellow">Aller au boulot</li>
-              <li id="orange">Etudier un nouveau programme</li>
-              <li id="green">Creer une nouvelle version de mon programme</li>
-              <li>More..</li>
-            </ul>
-          </div>
+      {loading ? (
+        <div className="main__home__content">
+          {data.map((days) => (
+            <div className="main__home__content__day">
+              <div className="main__home__content__day__title">{days.day}</div>
+              <div className="main__home__content__content__day__content">
+                {days.events.map((event) => (
+                  <ul>
+                    <li id={event.emergencyLevel}>
+                      {event.startTime}-{event.endTime}: {event.activity}
+                    </li>
+                  </ul>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-
-        <div className="main__home__content__day">
-          <div className="main__home__content__day__title">Tuesday</div>
-          <div className="main__home__content__content__day__content">
-            <ul>
-              <li id="yellow">Aller au boulot</li>
-              <li id="orange">Etudier un nouveau programme</li>
-              <li id="green">Creer une nouvelle version de mon programme</li>
-              <li>More..</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="main__home__content__day">
-          <div className="main__home__content__day__title">Wednesday</div>
-          <div className="main__home__content__content__day__content">
-            <ul>
-              <li id="yellow">Aller au boulot</li>
-              <li id="orange">Etudier un nouveau programme</li>
-              <li id="green">Creer une nouvelle version de mon programme</li>
-              <li>More..</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="main__home__content__day">
-          <div className="main__home__content__day__title">Thursday</div>
-          <div className="main__home__content__content__day__content">
-            <ul>
-              <li id="yellow">Aller au boulot</li>
-              <li id="orange">Etudier un nouveau programme</li>
-              <li id="green">Creer une nouvelle version de mon programme</li>
-              <li>More..</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="main__home__content__day">
-          <div className="main__home__content__day__title">Friday</div>
-          <div className="main__home__content__content__day__content">
-            <ul>
-              <li id="yellow">08:00 - 09:00: Gym : 18/05 Time-Left: 10 min</li>
-              <li id="orange">10:00 - 19:00: Gym : 18/05 Time-Left: 10 min</li>
-              <li id="green">04:00 - 03:00: Gym : 18/05 Time-Left: 10 min</li>
-              <li>More..</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="main__home__content__day">
-          <div className="main__home__content__day__title">Saturday</div>
-          <div className="main__home__content__content__day__content">
-            <ul>
-              <li id="yellow">Aller au boulot</li>
-              <li id="orange">Etudier un nouveau programme</li>
-              <li id="green">Creer une nouvelle version de mon programme</li>
-              <li>More..</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="main__home__content__day">
-          <div className="main__home__content__day__title">Sunday</div>
-          <div className="main__home__content__content__day__content">
-            <ul>
-              <li id="yellow">Aller au boulot</li>
-              <li id="orange">Etudier un nouveau programme</li>
-              <li id="green">Creer une nouvelle version de mon programme</li>
-              <li>More..</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      ) : (
+        <p>Loading</p>
+      )}
     </div>
   );
 };

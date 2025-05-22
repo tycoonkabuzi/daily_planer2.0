@@ -83,16 +83,16 @@ a {
     margin: auto;
     margin-left: 22%;
 
-    #red {
+    #high {
       background-color: lighten($red, 40%);
     }
-    #yellow {
+    #medium {
       background-color: lighten($yellow, 40%);
     }
-    #green {
+    #low {
       background-color: lighten($green, 40%);
     }
-    #orange {
+    #mid-low {
       background-color: lighten($orange, 40%);
     }
     &__content {

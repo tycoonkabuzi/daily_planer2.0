@@ -5,6 +5,7 @@ const AddTask = () => {
       <div className="main__home__title">New event</div>
       <div className="main__home__inputs">
         <input type="text" placeholder="Event" />
+        <input type="time" placeholder="Start time" />
         <input type="date" placeholder="Date" />
         <div className="main__home__inputs__howLong">
           <p>How long?</p>
