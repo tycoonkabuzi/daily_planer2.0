@@ -1,12 +1,83 @@
+import { useState } from "react";
 import "../style/main.scss";
+import axios from "axios";
+import { useNavigate } from "react-router";
 const AddTask = () => {
+  const [dataToAdd, setDataToAdd] = useState({});
+  const [emergency, setEmergency] = useState("low");
+
+  const navigate = useNavigate();
+  const handleFormData = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+
+    switch (e.target.className) {
+      case "main__home__urgency__colors--red":
+        setEmergency("high");
+        break;
+
+      case "main__home__urgency__colors--yellow":
+        setEmergency("mid-low");
+        break;
+      case "main__home__urgency__colors--orange":
+        setEmergency("medium");
+        break;
+      case "main__home__urgency__colors--green":
+        setEmergency("low");
+        break;
+      default:
+        setEmergency("low");
+        break;
+    }
+    console.log(dataToAdd);
+    setDataToAdd((data) => ({
+      ...data,
+      [fieldName]: value,
+      emergencyLevel: emergency,
+    }));
+  };
+
+  const addData = async () => {
+    try {
+      await axios.post("http://localhost:8080/activities", dataToAdd);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="main__home">
       <div className="main__home__title">New event</div>
       <div className="main__home__inputs">
-        <input type="text" placeholder="Event" />
-        <input type="time" placeholder="Start time" />
-        <input type="date" placeholder="Date" />
+        <input
+          type="text"
+          placeholder="Event"
+          name="activity"
+          onChange={handleFormData}
+        />
+        <div>
+          <label> Start time </label>
+          <input
+            name="startTime"
+            type="time"
+            placeholder="Start time"
+            onChange={handleFormData}
+          />
+          <label> End time </label>
+          <input
+            name="endTime"
+            type="time"
+            placeholder="End time"
+            onChange={handleFormData}
+          />
+        </div>
+        <input
+          name="date"
+          type="date"
+          placeholder="Date"
+          onChange={handleFormData}
+        />
+
         <div className="main__home__inputs__howLong">
           <p>How long?</p>
           <ul className="main__home__inputs__howLong__container">
@@ -23,20 +94,46 @@ const AddTask = () => {
             <li id="add">More</li>
           </ul>
         </div>
-        <textarea name="" id="" cols="30" rows="10">
+        <textarea
+          name="notes"
+          id=""
+          cols="30"
+          rows="10"
+          onChange={handleFormData}
+        >
           Notes
         </textarea>
       </div>
       <div className="main__home__urgency">
         <div className="main__home__urgency__colors">
-          <div className="main__home__urgency__colors--red"></div>
-          <div className="main__home__urgency__colors--orange"></div>
-          <div className="main__home__urgency__colors--yellow"></div>
-          <div className="main__home__urgency__colors--green"></div>
+          <div
+            className="main__home__urgency__colors--red"
+            onClick={handleFormData}
+          ></div>
+          <div
+            className="main__home__urgency__colors--orange"
+            onClick={handleFormData}
+          ></div>
+          <div
+            className="main__home__urgency__colors--yellow"
+            onClick={handleFormData}
+          ></div>
+          <div
+            className="main__home__urgency__colors--green"
+            onClick={handleFormData}
+          ></div>
         </div>
-        <button>Submit</button>
+        <button
+          onClick={() => {
+            addData();
+            navigate("/");
+          }}
+        >
+          Submit
+        </button>
       </div>
     </div>
   );
 };
+
 export default AddTask;
