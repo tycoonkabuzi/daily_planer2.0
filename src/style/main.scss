@@ -103,6 +103,7 @@ a {
 
       &__day {
         margin-top: 40px;
+
         width: 25%;
         height: 170px;
         border: 1px solid $primary;
@@ -118,6 +119,19 @@ a {
           margin-left: 10px;
           padding-bottom: 20px;
         }
+        .event-item {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          cursor: pointer;
+          padding: 8px;
+
+          &:hover {
+            color: $primary; // 👈 Change this to whatever color you want
+            transition: background-color 0.3s ease;
+          }
+        }
+
         &__content {
           padding-left: 20px;
           padding-right: 20px;
@@ -126,6 +140,11 @@ a {
           li {
             margin-top: 5px;
             list-style: none;
+          }
+
+          p {
+            margin: auto;
+            width: 100px;
           }
         }
       }

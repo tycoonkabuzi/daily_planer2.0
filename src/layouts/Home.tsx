@@ -7,6 +7,7 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const Home = () => {
       }
     };
     fetchData();
-  }, [data]);
+  }, []);
 
   return (
     <div className="main__home">
@@ -43,18 +44,20 @@ const Home = () => {
         <div className="main__home__content">
           {data && data.length > 0 ? (
             data.map((days) => (
-              <div className="main__home__content__day">
+              <div className="main__home__content__day" key={days._id}>
                 <div className="main__home__content__day__title">
                   {days.day}
                 </div>
                 <div className="main__home__content__content__day__content">
-                  {days.events.map((event) => (
-                    <ul>
+                  <ul>
+                    {days.events.map((event) => (
                       <li
-                        style={{
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "space-between",
+                        className="event-item"
+                        key={event._id}
+                        onClick={() => {
+                          navigate(
+                            `/day?singleDay=${days.day}&id=${event._id}`
+                          );
                         }}
                         id={event.emergencyLevel}
                       >
@@ -78,8 +81,8 @@ const Home = () => {
                           />
                         </div>
                       </li>
-                    </ul>
-                  ))}
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))

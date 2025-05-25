@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 const AddTask = () => {
   const [dataToAdd, setDataToAdd] = useState({});
   const [emergency, setEmergency] = useState("low");
-
+  console.log(dataToAdd);
   const navigate = useNavigate();
   const handleFormData = (e) => {
     const fieldName = e.target.name;
@@ -71,12 +71,7 @@ const AddTask = () => {
             onChange={handleFormData}
           />
         </div>
-        <input
-          name="date"
-          type="date"
-          placeholder="Date"
-          onChange={handleFormData}
-        />
+        <input name="date" type="date" onChange={handleFormData} />
 
         <div className="main__home__inputs__howLong">
           <p>How long?</p>
