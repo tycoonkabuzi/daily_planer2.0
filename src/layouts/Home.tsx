@@ -36,6 +36,16 @@ const Home = () => {
     fetchData();
   }, []);
 
+  const deleteActivity = (day, id) => {
+    try {
+      const response = axios.delete(
+        `http://localhost:8080/activities?day=${day}&id=${id}`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="main__home">
       <div className="main__home__title">Welcome to your Daily Plan</div>
@@ -51,17 +61,18 @@ const Home = () => {
                 <div className="main__home__content__content__day__content">
                   <ul>
                     {days.events.map((event) => (
-                      <li
-                        className="event-item"
-                        key={event._id}
-                        onClick={() => {
-                          navigate(
-                            `/day?singleDay=${days.day}&id=${event._id}`
-                          );
-                        }}
-                        id={event.emergencyLevel}
-                      >
-                        {event.startTime}-{event.endTime}: {event.activity}
+                      <div className="event-item">
+                        <li
+                          key={event._id}
+                          onClick={() => {
+                            navigate(
+                              `/day?singleDay=${days.day}&id=${event._id}`
+                            );
+                          }}
+                          id={event.emergencyLevel}
+                        >
+                          {event.startTime}-{event.endTime}: {event.activity}
+                        </li>
                         <div
                           style={{
                             width: "18%",
@@ -78,9 +89,12 @@ const Home = () => {
                             icon="material-symbols-light:delete-outline"
                             width="20"
                             height="20"
+                            onClick={() => {
+                              deleteActivity(days.day, event._id);
+                            }}
                           />
                         </div>
-                      </li>
+                      </div>
                     ))}
                   </ul>
                 </div>
