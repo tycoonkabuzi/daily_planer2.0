@@ -39,7 +39,7 @@ const AddTask = () => {
 
   const addData = async () => {
     try {
-      await axios.post("http://localhost:8080/activities", dataToAdd);
+      await axios.post("http://localhost:8000/activities", dataToAdd);
     } catch (err) {
       console.log(err);
     }

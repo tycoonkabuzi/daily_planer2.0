@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/activities");
+        const response = await axios.get("http://localhost:8000/activities");
         const dayOrder = [
           "Monday",
           "Tuesday",
