@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "../style/main.scss";
-import axios from "axios";
+
 import { useNavigate } from "react-router";
+import api from "../middlewears/api";
 const AddTask = () => {
   const [dataToAdd, setDataToAdd] = useState({});
   const [emergency, setEmergency] = useState("low");
@@ -39,7 +40,7 @@ const AddTask = () => {
 
   const addData = async () => {
     try {
-      await axios.post("http://localhost:8000/activities", dataToAdd);
+      await api.post("/activities", dataToAdd);
     } catch (err) {
       console.log(err);
     }

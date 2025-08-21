@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import TimeLeftCountDown from "../components/TimeLeftCountDown";
+import api from "../middlewears/api";
 
 const SingleActivity = () => {
   const [data, setData] = useState([]);
@@ -12,8 +12,8 @@ const SingleActivity = () => {
   useEffect(() => {
     const getSinglePost = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/activities/day?singleDay=${singleDay}&id=${id}`
+        const response = await api.get(
+          `/activities/day?singleDay=${singleDay}&id=${id}`
         );
         setData(response.data);
       } catch (error) {

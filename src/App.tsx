@@ -6,7 +6,7 @@ import AddTask from "./layouts/AddTask";
 import Help from "./layouts/Help";
 import SingleActivity from "./layouts/SingleActivity";
 import TimeLeftCountDown from "./components/TimeLeftCountDown";
-import Register from "./components/Register";
+import AuthForm from "./components/AuthForm";
 
 function App() {
   return (
@@ -18,7 +18,9 @@ function App() {
           <Route path="/day" element={<SingleActivity />} />
           <Route path="/help" element={<Help />} />
         </Route>
-        <Route path="/test" element={<Register />} />
+
+        <Route path="/login" element={<AuthForm />} />
+        <Route path="/register" element={<AuthForm />} />
       </Routes>
     </>
   );

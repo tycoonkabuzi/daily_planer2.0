@@ -275,6 +275,13 @@ a {
   display: flex;
   background-color: rgb(255, 255, 255);
 
+  .first {
+    order: 1;
+  }
+  .second {
+    order: 2;
+  }
+
   h1 {
     font-size: 45px;
   }
@@ -297,14 +304,17 @@ a {
     border-radius: 7px;
     color: white;
     border: none;
+    &:hover {
+      background-color: rgb(118, 46, 190);
+    }
   }
   &-background {
     width: 50%;
     height: 100vh;
     overflow: hidden;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
     position: relative;
+    z-index: 2;
+    animation: slideOut 0.3s ease-in-out forwards;
     &-text {
       position: absolute;
       color: white;
@@ -329,6 +339,8 @@ a {
     padding-left: 10%;
     padding-right: 10%;
     box-sizing: border-box;
+    animation: slideIn 0.3s ease-in-out forwards;
+
     p {
       color: rgb(115, 115, 115);
     }
@@ -336,5 +348,35 @@ a {
       margin-top: 10%;
       width: 80%;
     }
+  }
+}
+.radius-left {
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+.radius-right {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.account-message {
+  margin-top: 10%;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
   }
 }

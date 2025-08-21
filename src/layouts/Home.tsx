@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import "../style/main.scss";
-import axios from "axios";
 import { useNavigate } from "react-router";
+import api from "../middlewears/api";
 const Home = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/activities");
+        const response = await api.get("/activities");
         const dayOrder = [
           "Monday",
           "Tuesday",
@@ -38,9 +38,7 @@ const Home = () => {
 
   const deleteActivity = (day, id) => {
     try {
-      const response = axios.delete(
-        `http://localhost:8080/activities?day=${day}&id=${id}`
-      );
+      api.delete(`/activities?day=${day}&id=${id}`);
     } catch (error) {
       console.log(error);
     }
